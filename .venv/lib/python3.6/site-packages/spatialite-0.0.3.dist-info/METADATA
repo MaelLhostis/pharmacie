@@ -1,0 +1,59 @@
+Metadata-Version: 2.1
+Name: spatialite
+Version: 0.0.3
+Summary: Wrapper of sqlite3 module which adds SpatiaLite support.
+Home-page: https://github.com/malexer/spatialite
+Author: Alex (Oleksii) Markov
+Author-email: alex@markovs.me
+License: MIT
+Keywords: sqlite sqlite3 spatialite
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+spatialite
+==========
+
+Wrapper for standard Python module `sqlite3` which adds SpatiaLite support.
+
+
+Requirement: mod_spatialite
+---------------------------
+
+This module will try to load SpatiaLite extension in SQLite and thus requires
+"mod_spatialite" being present.
+
+Ubuntu::
+
+    $ apt-get install libsqlite3-mod-spatialite
+
+macOS::
+
+    $ brew install libspatialite
+
+
+Install
+-------
+
+Using pip::
+
+    $ pip install spatialite
+
+Usage
+-----
+
+.. code-block:: python
+
+    import spatialite
+
+
+    with spatialite.connect('sl_temp.db') as db:
+        print(db.execute('SELECT spatialite_version()').fetchone()[0])
+
+

@@ -1,0 +1,72 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready( function() {
+       $("#prix_brut, #taux_remise, #prix_achat_net, #prix_vente_net, #coef").keyup( function(event) {
+
+            var dict
+
+            var prix_brut = $("#prix_brut").val()
+            var taux_remise = $("#taux_remise").val()
+            var prix_achat_net = $("#prix_achat_net").val()
+            var prix_vente_net = $("#prix_vente_net").val()
+            var coef = $("#coef").val()
+
+            var url = "/calculator/test/" + this.id + "/" + prix_brut + "/" + taux_remise + "/" + prix_achat_net + "/" + prix_vente_net + "/" + coef
+            $.ajax({
+                type: "GET",
+                url: url,
+               success: function(data){
+                    dict = JSON.parse(data)
+                    $("#taux_remise").val(dict.taux_remise)
+                    $("#prix_achat_net").val(dict.prix_achat_net)
+                    $("#prix_vente_net").val(dict.prix_vente_net)
+                    $("#coef").val(dict.coef)
+
+                 }
+            });
+        });
+    });
+</script>
+pierre.gomel@gmail.com
+<style>
+
+</style>
+
+<div style="width:30%;float:left;height:1px;"></div>
+<div style="width:30%;float:left;">
+    <table class="table">
+        <tr scope="row">
+            <td class="left_column"><p>Prix brut :</p></td>
+            <td class="center_column"><input type="text" name="prix_brut", id="prix_brut" value="0"></td>
+            <td class="right_column">€</td>
+        </tr>
+        <tr scope="row">
+            <td class="left_column"><p>Taux de remise :</p></td>
+            <td class="center_column"><input type="text" name="taux_remise", id="taux_remise" value="0"></td>
+            <td class="right_column">%</td>
+        </tr>
+        <tr scope="row">
+            <td class="left_column"><p>Prix d'achat net :</p></td>
+            <td class="center_column"><input type="text" name="prix_achat_net", id="prix_achat_net" value="0"></td>
+            <td class="right_column">€</td>
+        </tr>
+        <tr scope="row">
+            <td class="left_column"><p>Prix de vente net :</p></td>
+            <td class="center_column"><input type="text" name="prix_vente_net", id="prix_vente_net" value="0"></td>
+            <td class="right_column">€</td>
+        </tr>
+        <tr scope="row">
+            <td class="left_column"><p>Coefficient multiplicateur :</p></td>
+            <td class="center_column"><input type="text" name="coef", id="coef" value="1"></td>
+            <td class="right_column">€</td>
+        </tr>
+    </table>
+</div>
+<div style="width:30%;float:left;"></div>
+
+
