@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class FormConfig(AppConfig):
-    name = 'form'
+    name = "form"

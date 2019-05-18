@@ -1,0 +1,78 @@
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="../../static/css/style.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<script>
+
+    var idq = 0
+    var idc = 0
+    var sub_id = 0
+    $(document).ready( function() {
+
+
+        $("#add_question").click( function(event) {
+            div = create_question_field(idq)
+            $("#questions").append(div);
+            $("#" + idq + "q").click( function(event) {
+                $( "#field" + this.id).remove();
+            });
+            idq += 1
+
+        });
+
+        $("#add_choice_question").click( function(event) {
+            div = create_choice_question_field(idc)
+            $("#choice_questions").append(div);
+            $("#" + idc + "c").click( function(event) {
+                   console.log("#field" + this.id)
+                $( "#field" + this.id).remove();
+            });
+            $("#" + idc + "p").click( function(event) {
+                $( "#answers" + this.id).append(create_answer_field(sub_id));
+                $("#" + sub_id + "r").click( function(event) {
+                    console.log("#answer" + sub_id + "r")
+                    $( "#answer" + this.id).remove();
+                });
+                sub_id += 1
+            });
+            idc += 1
+
+        });
+
+
+
+
+    });
+
+
+    var create_question_field = function(id){
+        return '<div id="field' + id + 'q"><input type="text" name="question' + id + 'q" id="question' + id + 'q" value=""><i id="' + id + 'q" class="fas fa-minus-circle"></i></br></div>'
+    }
+
+    var create_choice_question_field = function(id){
+        return '<div id="field' + id + 'c">\
+                    <input type="text" name="question' + id + 'c" id="question' + id + 'c" value=""><i id="' + id + 'p" class="fas fa-plus-circle"></i><i id="' + id + 'c" class="fas fa-minus-circle"></i></br>\
+                    <div id="answers' + id + 'p"></div>\
+                    </div>'
+    }
+
+    var create_answer_field = function(id){
+        return '<div id="answer' + id + 'r"><input type="text" name="ans' + id + 'r" id="ans' + id + 'r" value=""><i id="' + id + 'r" class="fas fa-minus-circle"></i></br></div>'
+    }
+
+
+
+</script>
+
+<button id="add_question">Ajouter une question</button>
+<button id="add_choice_question">Ajouter une question a choix multiple</button>
+
+<input type="text" name="title" id="title" value="">
+
+<div id="questions"></div>
+
+
+<div id="choice_questions"></div>

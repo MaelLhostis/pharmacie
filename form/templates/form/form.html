@@ -1,0 +1,24 @@
+
+
+<h1>{{ form.1 }}</h1>
+
+
+<form action="{% url 'save_result' form.0 %}" method="post">
+     {% csrf_token %}
+{% for q in questions %}
+    <h2>{{ q.1 }}</h2>
+    <input type="text" name="{{ q.0 }}" id="{{ q.0 }}">
+{% endfor %}
+
+
+
+{% for q in choices %}
+    <h2>{{ q.0.1 }}</h2>
+    {% for a in q|slice:"1:" %}
+        <input type="radio" name="{{ q.0.0 }}" id="{{ q.0.0 }}" value="{{ a }}">
+        <label for="{{ q.0.0 }}">{{ a }}</label>
+    {% endfor %}
+
+{% endfor %}
+
+<input type="submit" value="Vote">
