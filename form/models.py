@@ -9,26 +9,34 @@ class Form(models.Model):
     name = models.CharField(max_length=250)
 
     @staticmethod
-    def create_form(request):
-        dict_form = {
-            "name": "forumlaire",
-            "questions": ["Question 1 ?", "Question 2 ?"],
-            "choices": {
-                "Choix 1": ["oui", "non"],
-                "Choix 2": ["bleu", "rouge", "jaune"],
-                "Choix 3": ["18", "25", "50"],
-            },
-        }
+    def save_form(request):
 
-        form = Form(name=dict_form["name"])
+        dict = {}
+        dict['questions'] = []
+        dict['choices'] = {}
+        choice_key = ""
+
+        for key in request.POST:
+
+            if key == 'title':
+                dict['title'] = request.POST[key]
+            elif key[-1] == 'q':
+                dict['questions'].append(request.POST[key])
+            elif key[-1] == 'c':
+                dict['choices'].setdefault(request.POST[key], [])
+                choice_key = request.POST[key]
+            elif key[-1] == 'r':
+                dict['choices'][choice_key].append(request.POST[key])
+
+        form = Form(name=dict["title"])
         form.save()
 
-        for q in dict_form["questions"]:
+        for q in dict["questions"]:
             question = Question(form=form, question=q)
             question.save()
 
-        for key in dict_form["choices"]:
-            choice = Choice(form=form, question=key, choices=dict_form["choices"][key])
+        for key in dict["choices"]:
+            choice = Choice(form=form, question=key, choices=dict["choices"][key])
             choice.save()
 
     @staticmethod

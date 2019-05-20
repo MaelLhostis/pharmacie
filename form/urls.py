@@ -7,5 +7,6 @@ urlpatterns = [
     path("<int:form_id>", views.show_form, name="show_form"),
     path("save_result/<str:form_id>", views.save_result, name="save_result"),
     path("show_result/<str:form_id>", views.show_result, name="show_result"),
-    path("create_form", views.create_form, name="create_form"),
+    path("create_form/", views.create_form, name="create_form"),
+    path("save_form/", views.save_form, name="save_form"),
 ]

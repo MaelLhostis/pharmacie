@@ -42,6 +42,17 @@
 
         });
 
+        $("#get_form").click( function(event) {
+
+            var data = $(":input").serializeArray()
+            $.ajax({
+                type: 'POST',
+                url: '/form/save_form/',
+                data: {'data[]': data},
+            });
+
+
+        });
 
 
 
@@ -67,12 +78,17 @@
 
 </script>
 
+
 <button id="add_question">Ajouter une question</button>
 <button id="add_choice_question">Ajouter une question a choix multiple</button>
-
+<form action="{% url 'save_form' %}" method="post">
+    {% csrf_token %}
 <input type="text" name="title" id="title" value="">
 
 <div id="questions"></div>
 
 
 <div id="choice_questions"></div>
+
+<input type="submit" value="Vote">
+<button id="get_form">Save</button>

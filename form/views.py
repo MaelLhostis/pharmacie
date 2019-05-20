@@ -16,6 +16,10 @@ def create_form(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
+def save_form(request):
+
+    Form.save_form(request)
+    return HttpResponseRedirect("/form")
 
 def show_form(request, form_id):
 
