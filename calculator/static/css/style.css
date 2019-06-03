@@ -1,5 +1,10 @@
 *{
     font-family: "Gill Sans", sans-serif;
+    color: white;
+}
+
+body {
+    background-color: #222222;
 }
 
 nav {
@@ -26,9 +31,25 @@ nav ul a, nav ul a:hover, nav ul a:visited{
     text-decoration: none;
 }
 
+tr {
+    height: 30px;
+    line-height: 30px;
+    border-top: 1px solid #448617;
+    border-bottom: 1px solid #448617;
+}
+
+.table td, .table th {
+    border: none;
+}
+
+.center_column{
+    padding-top: 15px !important;
+}
+
 .calculator-input{
     width: 100%;
     text-align: right;
+    max-height: 30px;
 }
 
 .containerAnimateUnderline .animateUnderline {
@@ -81,4 +102,8 @@ nav ul a, nav ul a:hover, nav ul a:visited{
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
     transition: transform 0.3s;
+}
+
+input{
+    border-radius: 0.25rem;
 }

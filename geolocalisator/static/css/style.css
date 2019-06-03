@@ -1,5 +1,10 @@
 *{
     font-family: "Gill Sans", sans-serif;
+    color: white;
+}
+
+body {
+    background-color: #222222;
 }
 
 nav {
