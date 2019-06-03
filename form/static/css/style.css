@@ -1,5 +1,10 @@
 *{
     font-family: "Gill Sans", sans-serif;
+    color: white;
+}
+
+body {
+    background-color: #222222;
 }
 
 nav {
@@ -81,4 +86,71 @@ nav ul a, nav ul a:hover, nav ul a:visited{
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
     transition: transform 0.3s;
+}
+
+.form-content {
+    margin: 0 20%;
+}
+
+.form-content ul li:nth-child(2n+1){
+    background-color: #555555;
+    color: white;
+    border-top: 1px solid #448617;
+    border-bottom: 1px solid #448617;
+}
+
+.form-content ul{
+    list-style: none;
+    margin-top: 20px;
+}
+
+.form-content ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.form-content ul li a{
+    text-decoration: none;
+    margin-right: 10px;
+    color: white;
+}
+
+.form-content ul li a:first-child{
+    padding-right: 5px;
+    border-right: 1px solid #448617;
+    margin-right: 5px;
+}
+
+.form-name span {
+    margin-left: 10px;
+}
+
+.create-form-content {
+    margin: 0 20%;
+}
+
+.create-form-content div{
+    margin: 20px 0;
+}
+
+.create-form-content input{
+    border-radius: 0.25rem;
+}
+
+.create-form-content .answer{
+    margin-left: 20px;
+}
+
+i {
+    margin-left: 10px;
+}
+
+.form-detail{
+    margin: 0 20%;
+}
+
+.form-detail h1{
+    color: white;
 }

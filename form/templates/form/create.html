@@ -5,90 +5,103 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-<script>
+<nav>
+    <ul>
+        <li class='containerAnimateUnderline'><a href='/calculator' class='animateUnderline'>Calculatrice</a></li>
+        <li class='containerAnimateUnderline'><a href='/geolocalisator' class='animateUnderline'>Geolocalisation</a></li>
+        <li class='containerAnimateUnderline'><a href='/form' class='animateUnderline'>Formulaires</a></li>
+    </ul>
+</nav>
+<div class='create-form-content'>
+    <script>
 
-    var idq = 0
-    var idc = 0
-    var sub_id = 0
-    $(document).ready( function() {
+        var idq = 0
+        var idc = 0
+        var sub_id = 0
+        $(document).ready( function() {
 
 
-        $("#add_question").click( function(event) {
-            div = create_question_field(idq)
-            $("#questions").append(div);
-            $("#" + idq + "q").click( function(event) {
-                $( "#field" + this.id).remove();
-            });
-            idq += 1
-
-        });
-
-        $("#add_choice_question").click( function(event) {
-            div = create_choice_question_field(idc)
-            $("#choice_questions").append(div);
-            $("#" + idc + "c").click( function(event) {
-                   console.log("#field" + this.id)
-                $( "#field" + this.id).remove();
-            });
-            $("#" + idc + "p").click( function(event) {
-                $( "#answers" + this.id).append(create_answer_field(sub_id));
-                $("#" + sub_id + "r").click( function(event) {
-                    console.log("#answer" + sub_id + "r")
-                    $( "#answer" + this.id).remove();
+            $("#add_question").click( function(event) {
+                div = create_question_field(idq)
+                $("#questions").append(div);
+                $("#" + idq + "q").click( function(event) {
+                    $( "#field" + this.id).remove();
                 });
-                sub_id += 1
+                idq += 1
+
             });
-            idc += 1
+
+            $("#add_choice_question").click( function(event) {
+                div = create_choice_question_field(idc)
+                $("#choice_questions").append(div);
+                $("#" + idc + "c").click( function(event) {
+                    console.log("#field" + this.id)
+                    $( "#field" + this.id).remove();
+                });
+                $("#" + idc + "p").click( function(event) {
+                    $( "#answers" + this.id).append(create_answer_field(sub_id));
+                    $("#" + sub_id + "r").click( function(event) {
+                        console.log("#answer" + sub_id + "r")
+                        $( "#answer" + this.id).remove();
+                    });
+                    sub_id += 1
+                });
+                idc += 1
+
+            });
+
+            $("#get_form").click( function(event) {
+
+                var data = $(":input").serializeArray()
+                $.ajax({
+                    type: 'POST',
+                    url: '/form/save_form/',
+                    data: {'data[]': data},
+                });
+
+
+            });
+
+
 
         });
 
-        $("#get_form").click( function(event) {
 
-            var data = $(":input").serializeArray()
-            $.ajax({
-                type: 'POST',
-                url: '/form/save_form/',
-                data: {'data[]': data},
-            });
+        var create_question_field = function(id){
+            return '<div id="field' + id + 'q"><input type="text" name="question' + id + 'q" id="question' + id + 'q" value=""><i id="' + id + 'q" class="fas fa-minus-circle"></i></br></div>'
+        }
 
+        var create_choice_question_field = function(id){
+            return '<div id="field' + id + 'c">\
+                            <input type="text" name="question' + id + 'c" id="question' + id + 'c" value=""><i id="' + id + 'p" class="fas fa-plus-circle"></i><i id="' + id + 'c" class="fas fa-minus-circle"></i></br>\
+                            <div id="answers' + id + 'p" class="answer"></div>\
+                            </div>'
+        }
 
-        });
-
-
-
-    });
-
-
-    var create_question_field = function(id){
-        return '<div id="field' + id + 'q"><input type="text" name="question' + id + 'q" id="question' + id + 'q" value=""><i id="' + id + 'q" class="fas fa-minus-circle"></i></br></div>'
-    }
-
-    var create_choice_question_field = function(id){
-        return '<div id="field' + id + 'c">\
-                    <input type="text" name="question' + id + 'c" id="question' + id + 'c" value=""><i id="' + id + 'p" class="fas fa-plus-circle"></i><i id="' + id + 'c" class="fas fa-minus-circle"></i></br>\
-                    <div id="answers' + id + 'p"></div>\
-                    </div>'
-    }
-
-    var create_answer_field = function(id){
-        return '<div id="answer' + id + 'r"><input type="text" name="ans' + id + 'r" id="ans' + id + 'r" value=""><i id="' + id + 'r" class="fas fa-minus-circle"></i></br></div>'
-    }
+        var create_answer_field = function(id){
+            return '<div id="answer' + id + 'r"><input type="text" name="ans' + id + 'r" id="ans' + id + 'r" value="" class="answer"><i id="' + id + 'r" class="fas fa-minus-circle"></i></br></div>'
+        }
 
 
 
-</script>
+    </script>
+
+    <div>
+        <button id="add_question" class="btn btn-light">Ajouter une question</button>
+        <button id="add_choice_question" class="btn btn-light">Ajouter une question a choix multiple</button>
+    </div>
+        <form action="{% url 'save_form' %}" method="post">
+            <div>
+            {% csrf_token %}
+                <input type="text" name="title" id="title" value="">
+            </div>
+
+            <div id="questions"></div>
 
 
-<button id="add_question">Ajouter une question</button>
-<button id="add_choice_question">Ajouter une question a choix multiple</button>
-<form action="{% url 'save_form' %}" method="post">
-    {% csrf_token %}
-<input type="text" name="title" id="title" value="">
+            <div id="choice_questions"></div>
 
-<div id="questions"></div>
-
-
-<div id="choice_questions"></div>
-
-<input type="submit" value="Vote">
-<button id="get_form">Save</button>
+            <input type="submit" value="Vote" class="btn btn-light">
+            <button id="get_form" class="btn btn-light">Save</button>
+        </form>
+</div>

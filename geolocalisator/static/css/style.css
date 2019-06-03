@@ -1,10 +1,14 @@
+*{
+    font-family: "Gill Sans", sans-serif;
+}
+
 nav {
     display: flex;
     height: 60px;
-    background-color: #01df04;
-    border-radius: 0 0 10px 10px;
+    background-color: #555555;
     align-content: center;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 nav ul {
@@ -25,4 +29,56 @@ nav ul a, nav ul a:hover, nav ul a:visited{
 .calculator-input{
     width: 100%;
     text-align: right;
+}
+
+.containerAnimateUnderline .animateUnderline {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    color: white;
+}
+
+.containerAnimateUnderline .animateUnderline a {
+    text-decoration: none;
+}
+
+.containerAnimateUnderline .animateUnderline:hover::after,
+.containerAnimateUnderline .animateUnderline:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.containerAnimateUnderline .animateUnderline {
+    cursor: pointer;
+}
+
+.containerAnimateUnderline .animateUnderline::after,
+.containerAnimateUnderline .animateUnderline::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 5px);
+    width: 0;
+    right: 0;
+    height: 3px;
+    transform: translate3d(0, 0, 0);
+}
+
+.containerAnimateUnderline .animateUnderline::before {
+    transition: width 0.25s cubic-bezier(0.51, 0.18, 0, 0.88) 0.1s;
+    background: #448617;
+}
+
+.containerAnimateUnderline .animateUnderline::after {
+    transition: width 0.2s cubic-bezier(0.29, 0.18, 0.26, 0.83);
+    background: white;
+}
+
+.containerAnimateButton a span {
+    display: block;
+    padding: 0 20px;
+    height: 36px;
+    line-height: 36px;
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
 }
