@@ -23,10 +23,30 @@
                 url: url,
                 success: function(data){
                     dict = JSON.parse(data)
+
+                    if($(dict.taux_remise) !== taux_remise)
+                        $("#taux_remise").addClass("hasChange");
+
+                    if($(dict.prix_achat_net) !== prix_achat_net)
+                        $("#prix_achat_net").addClass("hasChange");
+
+                    if($(dict.prix_vente_net) !== prix_vente_net)
+                        $("#prix_vente_net").addClass("hasChange");
+
+                    if($(dict.coef) !== coef)
+                        $("#coef").addClass("hasChange");
+
                     $("#taux_remise").val(dict.taux_remise)
                     $("#prix_achat_net").val(dict.prix_achat_net)
                     $("#prix_vente_net").val(dict.prix_vente_net)
                     $("#coef").val(dict.coef)
+
+                    setTimeout(1000)
+
+                    $("#taux_remise").removeClass("hasChange");
+                    $("#prix_achat_net").removeClass("hasChange");
+                    $("#prix_vente_net").removeClass("hasChange");
+                    $("#coef").removeClass("hasChange");
 
                 }
             });

@@ -131,6 +131,10 @@ nav ul a, nav ul a:hover, nav ul a:visited{
     margin: 0 20%;
 }
 
+.create-form-content .btn{
+    margin-right: 20px;
+}
+
 .create-form-content div{
     margin: 20px 0;
 }
